@@ -40,8 +40,13 @@ Route::group(['middleware' => ['web']], function () {
 	})->where('id', '[0-9]+');
 
 	Route::get('cats', ['as' => 'gatos', function() {
-	    return 'All Cats';
+	    $cats = Furbook\Cat::all();
+	    return view('cats.index')->with('cats', $cats);
 	}]);
+
+	Route::get('cats/breeds/{name}', function($name){
+		//
+	});
 
 	Route::get('about', [ 'as' => 'sobre', function(){
 		return view('about')->with('number_of_cats', 9009);
